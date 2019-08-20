@@ -1,8 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request 
+from flask_cors import CORS
 from datetime import date, datetime
 import mysql.connector
 
 app = Flask(__name__)
+CORS(app)
 db_connect = mysql.connector.connect(user='root', password='', host='localhost', database='vuma_installations')
 
 @app.route('/installation/all', methods = ['GET'])
@@ -21,7 +23,7 @@ def create_inst():
     customer_name = request.json['customer_name']
     address = request.json['address']
     appointment_date = request.json['appointment_date']
-    appointment_time = request.json['appointment_time']
+    appointment_time = request.json['appointment_time'] 
     status_id = request.json['status_id']
     if (customer_name == "" or address == "" or  appointment_date == "" or status_id == ""):
         return jsonify({'response':[{'code': 500, 'message' : 'Please complete all required fields'}]})

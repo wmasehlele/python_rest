@@ -8,7 +8,6 @@
   <title> Vuma </title>
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
   <!-- Navigation -->
@@ -31,12 +30,13 @@
         </div>
       </div>
       <div class="col-lg-12" style="padding: 15px;" v-show="create">
-        <table class="table table-bordered">
+        <table class="table table-bordered"> 
           <thead>
             <tr>
               <th scope="col">Customer</th>
               <th scope="col">Address</th>
               <th scope="col">Appointment Date</th>
+              <th scope="col">Status</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>          
@@ -45,6 +45,11 @@
               <td><input class="form-control" type="text" placeholder="Enter customer namme" v-model="appointment.customer_name"></td>
               <td><input class="form-control" type="text" placeholder="Enter address" v-model="appointment.address"></td>
               <td><input class="form-control" type="text" placeholder="dd-mm-yyyy" v-model="appointment.appointment_date"></td>
+              <td>  
+                <select class="form-control" v-model="appointment.status">
+                  <option v-for="option in statuses" v-bind:value="option.id"> {{ option.status }} </option>
+                </select>
+              </td>
               <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" v-on:click="saveInstallation"> Save </button>
@@ -59,36 +64,29 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Customer</th>
               <th scope="col">Address</th>
               <th scope="col">Appointment Date</th>
+              <th scope="col">Status</th>
               <th scope="col">Last Modified</th>
             </tr>
           </thead>
           <tbody>          
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>          
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>               
+            <tr v-for="inst in installations">
+              <td> {{ inst.customer_name }} </td>
+              <td> {{ inst.address }} </td>
+              <td> {{ inst.appointment_date }} </td>
+              <td> {{ inst.status }} </td>   
+              <td> {{ inst.date_modified }} </td>          
             </tr>
           </tbody>
         </table>        
       </div>
     </div>
   </div>
-
-  <script src="vue-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
+  <script src="vue-app.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

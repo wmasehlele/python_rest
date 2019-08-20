@@ -30,6 +30,9 @@ function clean() {
 
 // Bring third party dependencies from node_modules into vendor directory
 function modules() {
+  // axios
+  var axios = gulp.src('./node_modules/axios/dist/*')
+    .pipe(gulp.dest('./vendor/axios'));  
   // Bootstrap
   var bootstrap = gulp.src('./node_modules/bootstrap/dist/**/*')
     .pipe(gulp.dest('./vendor/bootstrap'));
@@ -39,13 +42,14 @@ function modules() {
       '!./node_modules/jquery/dist/core.js'
     ])
     .pipe(gulp.dest('./vendor/jquery'));
-  return merge(bootstrap, jquery);
+  return merge(bootstrap, jquery, axios);
 }
 
 // Watch files
 function watchFiles() {
   gulp.watch("./**/*.css", browserSyncReload);
   gulp.watch("./**/*.html", browserSyncReload);
+  gulp.watch("./**/*.js", browserSyncReload);
 }
 
 // Define complex tasks
