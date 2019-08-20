@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Bare - Start Bootstrap Template</title>
+  <title> Vuma </title>
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -18,28 +18,77 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item active">
-            <a class="nav-link" href="#">Installations
-              <span class="sr-only">(current)</span>
-            </a>
-          </li> -->
-        </ul>
-      </div>
     </div>
   </nav>
 
   <!-- Page Content -->
   <div class="container" id="app">
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <h1 class="mt-5">{{ message }}</h1>
+      <div class="col-lg-12 text-left" style="padding: 15px;">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary" v-on:click="viewInstallations">View All</button>
+            <button type="button" class="btn btn-warning" v-on:click="createInstallation">Create New</button>
+        </div>
+      </div>
+      <div class="col-lg-12" style="padding: 15px;" v-show="create">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Customer</th>
+              <th scope="col">Address</th>
+              <th scope="col">Appointment Date</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>          
+          <tbody>
+            <tr>
+              <td><input class="form-control" type="text" placeholder="Enter customer namme" v-model="appointment.customer_name"></td>
+              <td><input class="form-control" type="text" placeholder="Enter address" v-model="appointment.address"></td>
+              <td><input class="form-control" type="text" placeholder="dd-mm-yyyy" v-model="appointment.appointment_date"></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-success" v-on:click="saveInstallation"> Save </button>
+                  <button type="button" class="btn btn-danger" v-on:click="cancel"> Cancel </button>                  
+                  </div>                
+              </td>          
+            </tr>            
+          </tbody>
+        </table>        
+      </div>      
+      <div class="col-lg-12" style="padding: 15px;" v-show="view_all">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Address</th>
+              <th scope="col">Appointment Date</th>
+              <th scope="col">Last Modified</th>
+            </tr>
+          </thead>
+          <tbody>          
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>          
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>               
+            </tr>
+          </tbody>
+        </table>        
       </div>
     </div>
   </div>
 
   <script src="vue-app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
